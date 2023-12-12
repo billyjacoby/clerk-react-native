@@ -1,30 +1,4 @@
-<p align="center">
-  <a href="https://clerk.com?utm_source=github&utm_medium=clerk_expo" target="_blank" rel="noopener noreferrer">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://images.clerk.com/static/logo-dark-mode-400x400.png">
-      <img src="https://images.clerk.com/static/logo-light-mode-400x400.png" height="64">
-    </picture>
-  </a>
-  <br />
-</p>
-
-# @clerk/clerk-expo
-
-<div align="center">
-
-[![Chat on Discord](https://img.shields.io/discord/856971667393609759.svg?logo=discord)](https://clerk.com/discord)
-[![Clerk documentation](https://img.shields.io/badge/documentation-clerk-green.svg)](https://clerk.com/docs?utm_source=github&utm_medium=clerk_expo)
-[![Follow on Twitter](https://img.shields.io/twitter/follow/ClerkDev?style=social)](https://twitter.com/intent/follow?screen_name=ClerkDev)
-
-[Changelog](https://github.com/clerk/javascript/blob/main/packages/expo/CHANGELOG.md)
-·
-[Report a Bug](https://github.com/clerk/javascript/issues/new?assignees=&labels=needs-triage&projects=&template=BUG_REPORT.yml)
-·
-[Request a Feature](https://github.com/clerk/javascript/issues/new?assignees=&labels=feature-request&projects=&template=FEATURE_REQUEST.yml)
-·
-[Ask a Question](https://github.com/clerk/javascript/discussions)
-
-</div>
+# @billyjacoby/clerk-react-native
 
 ---
 
@@ -38,7 +12,7 @@ Clerk is the easiest way to add authentication and user management to your Expo 
 
 - React v18+
 - Node.js `>=18.17.0` or later
-- An application built using Expo
+- react-native-inappbrowser-reborn
 
 If an expo app already exists, you can skip this section and go straight to Installation.
 Otherwise, you can create a new Expo app by running:
@@ -53,7 +27,9 @@ cd my-app
 Next, install the Clerk Expo SDK:
 
 ```sh
-npm install @clerk/clerk-expo
+npm install react-native-inappbrowser-reborn
+npx pod install
+npm install @billyjacoby/clerk-react-native
 ```
 
 ### Usage
@@ -159,14 +135,6 @@ You can get in touch with us in any of the following ways:
 ## Contributing
 
 We're open to all community contributions! If you'd like to contribute in any way, please read [our contribution guidelines](https://github.com/clerk/javascript/blob/main/docs/CONTRIBUTING.md).
-
-## Security
-
-`@clerk/clerk-expo` follows good practices of security, but 100% security cannot be assured.
-
-`@clerk/clerk-expo` is provided **"as is"** without any **warranty**. Use at your own risk.
-
-_For more information and to report security issues, please refer to our [security documentation](https://github.com/clerk/javascript/blob/main/docs/SECURITY.md)._
 
 ## License
 
