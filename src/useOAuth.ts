@@ -1,7 +1,6 @@
 import { useSignIn, useSignUp } from '@clerk/clerk-react';
 import type { OAuthStrategy, SetActive, SignInResource, SignUpResource } from '@clerk/types';
-import * as AuthSession from 'expo-auth-session';
-import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from 'react-native-inappbrowser-reborn';
 
 export type UseOAuthFlowParams = {
   strategy: OAuthStrategy;
@@ -19,7 +18,7 @@ export type StartOAuthFlowReturnType = {
   setActive?: SetActive;
   signIn?: SignInResource;
   signUp?: SignUpResource;
-  authSessionResult?: WebBrowser.WebBrowserAuthSessionResult;
+  authSessionResult?: WebBrowser.BrowserResult | WebBrowser.RedirectResult;
 };
 
 export function useOAuth(useOAuthParams: UseOAuthFlowParams) {
@@ -31,7 +30,9 @@ export function useOAuth(useOAuthParams: UseOAuthFlowParams) {
   const { signIn, setActive, isLoaded: isSignInLoaded } = useSignIn();
   const { signUp, isLoaded: isSignUpLoaded } = useSignUp();
 
-  async function startOAuthFlow(startOAuthFlowParams?: StartOAuthFlowParams): Promise<StartOAuthFlowReturnType> {
+  async function startOAuthFlow(
+    startOAuthFlowParams?: StartOAuthFlowParams,
+  ): Promise<StartOAuthFlowReturnType> {
     if (!isSignInLoaded || !isSignUpLoaded) {
       return {
         createdSessionId: '',
@@ -46,26 +47,23 @@ export function useOAuth(useOAuthParams: UseOAuthFlowParams) {
     // This redirect URL needs to be whitelisted for your Clerk production instance via
     // https://clerk.com/docs/reference/backend-api/tag/Redirect-URLs#operation/CreateRedirectURL
     //
-    // For more information go to:
-    // https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionmakeredirecturi
-    const oauthRedirectUrl =
-      startOAuthFlowParams?.redirectUrl ||
-      useOAuthParams.redirectUrl ||
-      AuthSession.makeRedirectUri({
-        path: 'oauth-native-callback',
-      });
+    const oauthRedirectUrl = startOAuthFlowParams?.redirectUrl || useOAuthParams.redirectUrl;
+
+    if (!oauthRedirectUrl) {
+      throw new Error('Missing oauth redirect url');
+    }
 
     await signIn.create({ strategy, redirectUrl: oauthRedirectUrl });
 
     const { externalVerificationRedirectURL } = signIn.firstFactorVerification;
 
-    const authSessionResult = await WebBrowser.openAuthSessionAsync(
-      // @ts-ignore
-      externalVerificationRedirectURL.toString(),
+    const authSessionResult = await WebBrowser.InAppBrowser.openAuth(
+      externalVerificationRedirectURL!.toString(),
       oauthRedirectUrl,
+      { ephemeralWebSession: true },
     );
 
-    // @ts-expect-error
+    // @ts-expect-error URL should exist here
     const { type, url } = authSessionResult || {};
 
     // TODO: Check all the possible AuthSession results

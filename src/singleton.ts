@@ -4,9 +4,11 @@ import type { HeadlessBrowserClerk } from '@clerk/clerk-react';
 
 import type { TokenCache } from './cache';
 
+import { version } from '../package.json';
+
 Clerk.sdkMetadata = {
-  name: PACKAGE_NAME,
-  version: PACKAGE_VERSION,
+  name: '@billyjacoby/clerk-react-native',
+  version,
 };
 
 const KEY = '__clerk_client_jwt';
@@ -44,12 +46,14 @@ export function buildClerk({ key, tokenCache }: BuildClerkOptions): HeadlessBrow
     });
 
     // @ts-expect-error
-    clerk.__unstable__onAfterResponse(async (_: FapiRequestInit, response: FapiResponse<unknown>) => {
-      const authHeader = response.headers.get('authorization');
-      if (authHeader) {
-        await saveToken(KEY, authHeader);
-      }
-    });
+    clerk.__unstable__onAfterResponse(
+      async (_: FapiRequestInit, response: FapiResponse<unknown>) => {
+        const authHeader = response.headers.get('authorization');
+        if (authHeader) {
+          await saveToken(KEY, authHeader);
+        }
+      },
+    );
   }
 
   return clerk;
