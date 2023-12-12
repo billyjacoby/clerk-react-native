@@ -1,0 +1,37 @@
+diff --git a/node_modules/@clerk/clerk-react/dist/index.js b/node_modules/@clerk/clerk-react/dist/index.js
+index 115264b..52c378c 100644
+--- a/node_modules/@clerk/clerk-react/dist/index.js
++++ b/node_modules/@clerk/clerk-react/dist/index.js
+@@ -260,19 +260,20 @@ function withMaxAllowedInstancesGuard(WrappedComponent, name, error) {
+   return Hoc;
+ }
+ 
++//! Requiring react-dom causes issues when used with RN
+ // src/utils/useCustomElementPortal.tsx
+-var import_react3 = __toESM(require("react"));
+-var import_react_dom = require("react-dom");
+-var useCustomElementPortal = (elements) => {
+-  const initialState = Array(elements.length).fill(null);
+-  const [nodes, setNodes] = (0, import_react3.useState)(initialState);
+-  return elements.map((el, index) => ({
+-    id: el.id,
+-    mount: (node) => setNodes((prevState) => prevState.map((n, i) => i === index ? node : n)),
+-    unmount: () => setNodes((prevState) => prevState.map((n, i) => i === index ? null : n)),
+-    portal: () => /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, nodes[index] ? (0, import_react_dom.createPortal)(el.component, nodes[index]) : null)
+-  }));
+-};
++// var import_react3 = __toESM(require("react"));
++// var import_react_dom = require("react-dom");
++// var useCustomElementPortal = (elements) => {
++//   const initialState = Array(elements.length).fill(null);
++//   const [nodes, setNodes] = (0, import_react3.useState)(initialState);
++//   return elements.map((el, index) => ({
++//     id: el.id,
++//     mount: (node) => setNodes((prevState) => prevState.map((n, i) => i === index ? node : n)),
++//     unmount: () => setNodes((prevState) => prevState.map((n, i) => i === index ? null : n)),
++//     portal: () => /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, nodes[index] ? (0, import_react_dom.createPortal)(el.component, nodes[index]) : null)
++//   }));
++// };
+ 
+ // src/utils/useCustomPages.tsx
+ var import_shared = require("@clerk/shared");

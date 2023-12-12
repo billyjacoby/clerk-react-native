@@ -1,6 +1,6 @@
 {
   "name": "@billyjacoby/clerk-react-native",
-  "version": "1.0.0-alpha-v5.9",
+  "version": "1.0.0",
   "description": "Clerk Bare React Native library",
   "keywords": [
     "react",
@@ -31,13 +31,15 @@
     "dev": "tsup --watch",
     "dev:publish": "npm run dev -- --env.publish",
     "lint": "eslint src/",
-    "publish:local": "npx yalc push --replace  --sig"
+    "publish:local": "npx yalc push --replace  --sig",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@clerk/clerk-js": "5.0.0-alpha-v5.9",
     "@clerk/clerk-react": "5.0.0-alpha-v5.9",
     "@clerk/shared": "2.0.0-alpha-v5.5",
     "base-64": "^1.0.0",
+    "patch-package": "^8.0.0",
     "react-native-url-polyfill": "2.0.0"
   },
   "devDependencies": {
@@ -47,16 +49,14 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "eslint-config-custom": "*",
-    "expo-auth-session": "^5.0.2",
-    "expo-web-browser": "^12.3.2",
+    "rimraf": "^5.0.5",
     "tslib": "^2.3.1",
+    "tsup": "^8.0.1",
     "typescript": "*"
   },
   "peerDependencies": {
-    "expo-auth-session": ">=4",
-    "expo-web-browser": ">=12",
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-native-inappbrowser-reborn": "^3.7.0"
   },
   "engines": {
     "node": ">=18.17.0"

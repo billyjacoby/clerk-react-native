@@ -1,8 +1,12 @@
 import './polyfills';
 
-import type { ClerkProviderProps as ClerkReactProviderProps } from '@clerk/clerk-react';
-import { __internal__setErrorThrowerOptions, ClerkProvider as ClerkReactProvider } from '@clerk/clerk-react';
 import React from 'react';
+
+import type { ClerkProviderProps as ClerkReactProviderProps } from '@clerk/clerk-react';
+import {
+  __internal__setErrorThrowerOptions,
+  ClerkProvider as ClerkReactProvider,
+} from '@clerk/clerk-react';
 
 import type { TokenCache } from './cache';
 import { MemoryTokenCache } from './cache';
@@ -29,8 +33,7 @@ export function ClerkProvider(props: ClerkProviderProps): JSX.Element {
       {...rest}
       publishableKey={key}
       Clerk={buildClerk({ key, tokenCache })}
-      standardBrowser={!isReactNative()}
-    >
+      standardBrowser={!isReactNative()}>
       {children}
     </ClerkReactProvider>
   );
