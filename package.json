@@ -1,0 +1,67 @@
+{
+  "name": "@billyjacoby/clerk-react-native",
+  "version": "1.0.0-alpha-v5.9",
+  "description": "Clerk Bare React Native library",
+  "keywords": [
+    "react",
+    "react-native",
+    "expo",
+    "auth",
+    "authentication",
+    "passwordless",
+    "session",
+    "jwt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billyjacoby/clerk-react-native.git"
+  },
+  "license": "MIT",
+  "author": "Billy Jacoby",
+  "main": "dist/index.js",
+  "source": "src/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:declarations": "tsc -p tsconfig.declarations.json",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "dev:publish": "npm run dev -- --env.publish",
+    "lint": "eslint src/",
+    "publish:local": "npx yalc push --replace  --sig"
+  },
+  "dependencies": {
+    "@clerk/clerk-js": "5.0.0-alpha-v5.9",
+    "@clerk/clerk-react": "5.0.0-alpha-v5.9",
+    "@clerk/shared": "2.0.0-alpha-v5.5",
+    "base-64": "^1.0.0",
+    "react-native-url-polyfill": "2.0.0"
+  },
+  "devDependencies": {
+    "@clerk/types": "^4.0.0-alpha-v5.9",
+    "@types/base-64": "^1.0.2",
+    "@types/node": "^18.17.0",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "eslint-config-custom": "*",
+    "expo-auth-session": "^5.0.2",
+    "expo-web-browser": "^12.3.2",
+    "tslib": "^2.3.1",
+    "typescript": "*"
+  },
+  "peerDependencies": {
+    "expo-auth-session": ">=4",
+    "expo-web-browser": ">=12",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
